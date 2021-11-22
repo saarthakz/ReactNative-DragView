@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, useWindowDimensions, PanResponder } from 'react-native';
+import DragView from './components/DragView';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const height = useWindowDimensions().height;
+  const width = useWindowDimensions().width;
+
+  const styles = StyleSheet.create({
+    container: {
+      height: height,
+      width: "100%",
+      backgroundColor: 'rgb(150, 150, 150)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    boxContainer: {
+      height: "90%",
+      width: "90%",
+      backgroundColor: "rgba(255, 255, 255, 0.5)",
+      borderRadius: 10,
+      overflow: "hidden",
+    },
+  });
+
+  return (<>
+    <StatusBar backgroundColor="rgb(0, 0, 0)" />
+    <SafeAreaView style={styles.container}
+    >
+      <DragView parentHeight={height} parentWidth={width} />
+    </SafeAreaView>
+  </>);
+}
